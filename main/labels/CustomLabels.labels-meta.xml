@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Invalid_Loan_Change_Date</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid Loan Change Date</shortDescription>
+        <value>Charge may not be added before commencement date of loan</value>
+    </labels>
+    <labels>
+        <fullName>Only_One_Release_Charge_Allowed</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Only One Release Charge Allowed</shortDescription>
+        <value>Loan may only have one Release Charge</value>
+    </labels>
+    <labels>
+        <fullName>Charge_Type_Cannot_Be_Changed</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Charge Type Cannot Be Changed</shortDescription>
+        <value>Charge type cannot be changed</value>
+    </labels>
+    <labels>
+        <fullName>Release_Charge_Cannot_Be_Deleted</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Release Charge Cannot Be Deleted</shortDescription>
+        <value>Release charge cannot be deleted</value>
+    </labels>
+</CustomLabels>
