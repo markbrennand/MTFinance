@@ -6,6 +6,8 @@
  */
 public with sharing class Helper {
     public static String RELEASE_CHARGE = 'Release Charge';
+    public static String INTEREST_CHARGE = 'Interest Charge';
+    public static String ADMIN_FEE = 'Admin Fee';
     public static Decimal RELEASE_CHARGE_FEE = 500.0;
     public static Decimal CHANGE_TERM_FEE = 300.0;
 

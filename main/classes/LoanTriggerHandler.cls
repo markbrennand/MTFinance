@@ -90,7 +90,7 @@ public with sharing class LoanTriggerHandler {
                     new Loan_Charge__c(
                             Loan__c = changedTermId,
                             Charge_Date__c = Helper.NOW.date(),
-                            Charge_Type__c = 'Admin Fee',
+                            Charge_Type__c = Helper.ADMIN_FEE,
                             Amount__c = Helper.CHANGE_TERM_FEE
                     )
             );

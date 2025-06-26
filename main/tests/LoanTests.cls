@@ -27,13 +27,13 @@ public with sharing class LoanTests {
 
             List<Loan_Charge__c> charges = TestHelper.getCharges(loans[0]);
             Assert.areEqual(1, charges.size());
-            Assert.areEqual('Release Charge', charges[0].Charge_Type__c);
+            Assert.areEqual(Helper.RELEASE_CHARGE, charges[0].Charge_Type__c);
             Assert.areEqual(500.0, charges[0].Amount__c);
             Assert.areEqual(Helper.NOW.addMonths(2).date(), charges[0].Charge_Date__c);
 
             charges = TestHelper.getCharges(loans[1]);
             Assert.areEqual(1, charges.size());
-            Assert.areEqual('Release Charge', charges[0].Charge_Type__c);
+            Assert.areEqual(Helper.RELEASE_CHARGE, charges[0].Charge_Type__c);
             Assert.areEqual(500.0, charges[0].Amount__c);
             Assert.areEqual(Helper.NOW.addMonths(3).date(), charges[0].Charge_Date__c);
         }
@@ -84,10 +84,10 @@ public with sharing class LoanTests {
 
             Test.stopTest();
 
-            Assert.isFalse([SELECT Id FROM Loan_Charge__c WHERE Loan__c = :loans[0].Id AND Charge_Date__c = :Helper.NOW.date() AND Charge_Type__c = 'Admin Fee' AND Amount__c = 300.0 ].isEmpty());
-            Assert.isFalse([SELECT Id FROM Loan_Charge__c WHERE Loan__c = :loans[1].Id AND Charge_Date__c = :Helper.NOW.date() AND Charge_Type__c = 'Admin Fee' AND Amount__c = 300.0 ].isEmpty());
-            Assert.isFalse([SELECT Id FROM Loan_Charge__c WHERE Loan__c = :loans[0].Id AND Charge_Date__c = :loans[0].Date_Loan_Issued__c.addMonths(12) AND Charge_Type__c = 'Release Charge' AND Amount__c = 500.0 ].isEmpty());
-            Assert.isFalse([SELECT Id FROM Loan_Charge__c WHERE Loan__c = :loans[1].Id AND Charge_Date__c = :loans[1].Date_Loan_Issued__c.addMonths(16) AND Charge_Type__c = 'Release Charge' AND Amount__c = 500.0 ].isEmpty());
+            Assert.isFalse([SELECT Id FROM Loan_Charge__c WHERE Loan__c = :loans[0].Id AND Charge_Date__c = :Helper.NOW.date() AND Charge_Type__c = :Helper.ADMIN_FEE AND Amount__c = 300.0 ].isEmpty());
+            Assert.isFalse([SELECT Id FROM Loan_Charge__c WHERE Loan__c = :loans[1].Id AND Charge_Date__c = :Helper.NOW.date() AND Charge_Type__c = :Helper.ADMIN_FEE AND Amount__c = 300.0 ].isEmpty());
+            Assert.isFalse([SELECT Id FROM Loan_Charge__c WHERE Loan__c = :loans[0].Id AND Charge_Date__c = :loans[0].Date_Loan_Issued__c.addMonths(12) AND Charge_Type__c = :Helper.RELEASE_CHARGE AND Amount__c = 500.0 ].isEmpty());
+            Assert.isFalse([SELECT Id FROM Loan_Charge__c WHERE Loan__c = :loans[1].Id AND Charge_Date__c = :loans[1].Date_Loan_Issued__c.addMonths(16) AND Charge_Type__c = :Helper.RELEASE_CHARGE AND Amount__c = 500.0 ].isEmpty());
             Assert.areEqual(startTotalLoan1 + 300.0, [SELECT Total_Charges_on_the_Loan__c FROM Loan__c WHERE Id = :loans[0].Id].Total_Charges_on_the_Loan__c);
             Assert.areEqual(startTotalLoan2 + 300.0, [SELECT Total_Charges_on_the_Loan__c FROM Loan__c WHERE Id = :loans[1].Id].Total_Charges_on_the_Loan__c);
         }
@@ -105,7 +105,7 @@ public with sharing class LoanTests {
             insert new List<Loan_Charge__c>{
                     new Loan_Charge__c(
                             Loan__c = loans[0].Id,
-                            Charge_Type__c = 'Interest Charge',
+                            Charge_Type__c = Helper.INTEREST_CHARGE,
                             Charge_Date__c = Helper.NOW.date(),
                             Amount__c = 1.0
                     ),
@@ -117,25 +117,25 @@ public with sharing class LoanTests {
                     ),
                     new Loan_Charge__c(
                             Loan__c = loans[0].Id,
-                            Charge_Type__c = 'Admin Fee',
+                            Charge_Type__c = Helper.ADMIN_FEE,
                             Charge_Date__c = Helper.NOW.date(),
                             Amount__c = 16.0
                     ),
                     new Loan_Charge__c(
                             Loan__c = loans[0].Id,
-                            Charge_Type__c = 'Interest Charge',
+                            Charge_Type__c = Helper.INTEREST_CHARGE,
                             Charge_Date__c = Helper.NOW.date(),
                             Amount__c = 64.0
                     ),
                     new Loan_Charge__c(
                             Loan__c = loans[1].Id,
-                            Charge_Type__c = 'Interest Charge',
+                            Charge_Type__c = Helper.INTEREST_CHARGE,
                             Charge_Date__c = Helper.NOW.date(),
                             Amount__c = 2.0
                     ),
                     new Loan_Charge__c(
                             Loan__c = loans[1].Id,
-                            Charge_Type__c = 'Admin Fee',
+                            Charge_Type__c = Helper.ADMIN_FEE,
                             Charge_Date__c = Helper.NOW.date(),
                             Amount__c = 8.0
                     )
@@ -150,13 +150,13 @@ public with sharing class LoanTests {
             insert new List<Loan_Charge__c>{
                     new Loan_Charge__c(
                             Loan__c = loans[0].Id,
-                            Charge_Type__c = 'Interest Charge',
+                            Charge_Type__c = Helper.INTEREST_CHARGE,
                             Charge_Date__c = Helper.NOW.addMonths(3).date(),
                             Amount__c = 256.0
                     ),
                     new Loan_Charge__c(
                             Loan__c = loans[0].Id,
-                            Charge_Type__c = 'Admin Fee',
+                            Charge_Type__c = Helper.ADMIN_FEE,
                             Charge_Date__c = Helper.NOW.addMonths(6).date(),
                             Amount__c = 1024.0
                     ),
@@ -168,7 +168,7 @@ public with sharing class LoanTests {
                     ),
                     new Loan_Charge__c(
                             Loan__c = loans[1].Id,
-                            Charge_Type__c = 'Interest Charge',
+                            Charge_Type__c = Helper.INTEREST_CHARGE,
                             Charge_Date__c = Helper.NOW.addMonths(24).date(),
                             Amount__c = 128.0
                     )

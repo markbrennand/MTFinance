@@ -6,7 +6,7 @@
  */
 @IsTest
 public with sharing class LoanChargeTests {
-    private final static Set<String> TYPES = new Set<String> { 'Interest Charge', 'Legal Fee', 'Admin Fee' };
+    private final static Set<String> TYPES = new Set<String> { Helper.INTEREST_CHARGE, 'Legal Fee', Helper.ADMIN_FEE };
 
     @TestSetup
     private static void setup() {
@@ -69,7 +69,7 @@ public with sharing class LoanChargeTests {
             try {
                 insert charges;
             } catch (DMLException de) {
-                Assert.isTrue(de.getMessage().contains(Label.Invalid_Loan_Change_Date));
+                Assert.isTrue(de.getMessage().contains(Label.Invalid_Interest_Charge_Date));
             }
 
             charges.clear();
@@ -94,7 +94,7 @@ public with sharing class LoanChargeTests {
             try {
                 update charges;
             } catch (DMLException de) {
-                Assert.isTrue(de.getMessage().contains(Label.Invalid_Loan_Change_Date));
+                Assert.isTrue(de.getMessage().contains(Label.Invalid_Interest_Charge_Date));
             }
 
             Test.stopTest();
@@ -147,7 +147,7 @@ public with sharing class LoanChargeTests {
                 insert new List<Loan_Charge__c>{
                         new Loan_Charge__c(
                                 Loan__c = loans[0].Id,
-                                Charge_Type__c = 'Interest Charge',
+                                Charge_Type__c = Helper.INTEREST_CHARGE,
                                 Charge_Date__c = Helper.NOW.date(),
                                 Amount__c = 100.0
                         ),
@@ -159,7 +159,7 @@ public with sharing class LoanChargeTests {
                         ),
                         new Loan_Charge__c(
                                 Loan__c = loans[1].Id,
-                                Charge_Type__c = 'Interest Charge',
+                                Charge_Type__c = Helper.INTEREST_CHARGE,
                                 Charge_Date__c = Helper.NOW.date(),
                                 Amount__c = 100.0
                         )
@@ -187,13 +187,13 @@ public with sharing class LoanChargeTests {
                             Loan__c = loans[0].Id,
                             Amount__c = 100.0,
                             Charge_Date__c = Helper.NOW.date(),
-                            Charge_Type__c = 'Interest Charge'
+                            Charge_Type__c = Helper.INTEREST_CHARGE
                     ),
                     new Loan_Charge__c(
                             Loan__c = loans[1].Id,
                             Amount__c = 100.0,
                             Charge_Date__c = Helper.NOW.date(),
-                            Charge_Type__c = 'Interest Charge'
+                            Charge_Type__c = Helper.INTEREST_CHARGE
                     )
             };
 
@@ -205,13 +205,13 @@ public with sharing class LoanChargeTests {
                             Loan__c = loans[0].Id,
                             Amount__c = 100.0,
                             Charge_Date__c = Helper.NOW.addDays(107).date(),
-                            Charge_Type__c = 'Interest Charge'
+                            Charge_Type__c = Helper.INTEREST_CHARGE
                     ),
                     new Loan_Charge__c(
                             Loan__c = loans[1].Id,
                             Amount__c = 100.0,
                             Charge_Date__c = Helper.NOW.addDays(347).date(),
-                            Charge_Type__c = 'Interest Charge'
+                            Charge_Type__c = Helper.INTEREST_CHARGE
                     )
             };
 
@@ -249,7 +249,7 @@ public with sharing class LoanChargeTests {
                 charge.Amount__c = 100000;
             }
 
-            charges[2].Charge_Type__c = charges[2].Charge_Type__c == 'Legal Fee' ? 'Interest Charge' : 'Legal Fee';
+            charges[2].Charge_Type__c = charges[2].Charge_Type__c == 'Legal Fee' ? Helper.INTEREST_CHARGE : 'Legal Fee';
 
             try {
                 upsert charges;

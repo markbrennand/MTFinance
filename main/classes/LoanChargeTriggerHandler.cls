@@ -74,7 +74,6 @@ public with sharing class LoanChargeTriggerHandler {
                         valid = false;
                     }
                 }
-
             }
 
             when DELETED {
@@ -125,8 +124,8 @@ public with sharing class LoanChargeTriggerHandler {
     }
 
     private static Boolean validateDate(final Loan_Charge__c loanCharge, final Loan__c loan) {
-        if (loanCharge.Charge_Date__c < loan.Date_Loan_Issued__c) {
-            loanCharge.Charge_Date__c.addError(Label.Invalid_Loan_Change_Date);
+        if (loanCharge.Charge_Type__c == Helper.INTEREST_CHARGE && loanCharge.Charge_Date__c < loan.Date_Loan_Issued__c) {
+            loanCharge.Charge_Date__c.addError(Label.Invalid_Interest_Charge_Date);
             return false;
         }
 

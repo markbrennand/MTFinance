@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
-        <fullName>Invalid_Loan_Change_Date</fullName>
+        <fullName>Invalid_Interest_Charge_Date</fullName>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>Invalid Loan Change Date</shortDescription>
-        <value>Charge may not be added before commencement date of loan</value>
+        <shortDescription>Invalid Interest Charge Date</shortDescription>
+        <value>Interest may not be charged before commencement date of loan</value>
     </labels>
     <labels>
         <fullName>Only_One_Release_Charge_Allowed</fullName>
